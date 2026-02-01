@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Products - ShopEase{% endblock %}
+
+{% block content %}
+<h1>Our Products</h1>
+<div class="product-list">
+    <div class="product">
+        <img src="{% static 'images/smartwatch.jpg' %}" alt="Smart Watch">
+        <h3>Smart Watch</h3>
+        <p>R1,299</p>
+    </div>
+    <div class="product">
+        <img src="{% static 'images/headphones.jpg' %}" alt="Headphones">
+        <h3>Headphones</h3>
+        <p>R899</p>
+    </div>
+</div>
+{% endblock %}
