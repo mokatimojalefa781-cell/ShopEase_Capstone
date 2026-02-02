@@ -59,12 +59,20 @@ TEMPLATES = [
 WSGI_APPLICATION = 'capstone.wsgi.application'
 
 # Database
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('DJANGO_DB_NAME', 'shopease'),
+        'USER': os.getenv('DJANGO_DB_USER', 'shopease_user'),
+        'PASSWORD': os.getenv('DJANGO_DB_PASSWORD', 'mojalefa'),
+        'HOST': os.getenv('DJANGO_DB_HOST', 'localhost'),
+        'PORT': os.getenv('DJANGO_DB_PORT', '3306'),
     }
 }
+
+
+
 
 # Password validators
 AUTH_PASSWORD_VALIDATORS = [

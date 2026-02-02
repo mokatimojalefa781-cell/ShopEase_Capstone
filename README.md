@@ -1,0 +1,76 @@
+# ShopEase Capstone Project
+
+An e-commerce web application built with Django, using MariaDB as the database. The project can run both in a local virtual environment and in Docker containers.
+
+---
+
+## Features
+
+- User registration and login
+- Browse products
+- Add products to cart
+- Checkout system
+- Admin dashboard to manage products
+- Uses MariaDB as the database backend
+
+---
+
+## Prerequisites
+
+- Python 3.13+
+- pip
+- Docker (optional, for containerized deployment)
+- MariaDB 12+
+
+---
+
+## Setup with Virtual Environment
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/mokatimojalefa781-cell/ShopEase_Capstone.git
+cd ShopEase_Capstone
+Create a virtual environment and activate it:
+
+python -m venv venv
+.\venv\Scripts\activate    # Windows
+source venv/bin/activate   # macOS/Linux
+Install dependencies:
+
+pip install -r requirements.txt
+Configure MariaDB:
+
+Create a database named shopease
+
+Create a user shopease_user with password mojalefa
+
+Grant privileges:
+
+CREATE DATABASE shopease;
+CREATE USER 'shopease_user'@'localhost' IDENTIFIED BY 'mojalefa';
+GRANT ALL PRIVILEGES ON shopease.* TO 'shopease_user'@'localhost';
+FLUSH PRIVILEGES;
+Apply migrations:
+
+python manage.py migrate
+Add products and prices:
+
+python manage.py add_products
+python manage.py add_prices
+Run the development server:
+
+python manage.py runserver
+Visit http://127.0.0.1:8000/ to view the site.
+
+Setup with Docker
+Make sure Docker is running.
+
+Build the Docker image:
+
+docker build -t shopease .
+Run the container:
+
+docker run -p 8000:8000 shopease
+Visit http://127.0.0.1:8000/ to view the site.
+
