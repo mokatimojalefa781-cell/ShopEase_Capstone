@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  db:
+    image: mariadb:12.1
+    container_name: shopease_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mojalefa
+      MYSQL_DATABASE: shopease
+      MYSQL_USER: shopease_user
+      MYSQL_PASSWORD: mojalefa
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  web:
+    build: .
+    container_name: shopease_web
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py add_products &&
+             python manage.py add_prices &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DJANGO_DB_NAME: shopease
+      DJANGO_DB_USER: shopease_user
+      DJANGO_DB_PASSWORD: mojalefa
+      DJANGO_DB_HOST: db
+      DJANGO_DB_PORT: 3306
+
+volumes:
+  db_data:
+
