@@ -1,0 +1,79 @@
+{% extends 'shop/base.html' %}
+{% load static %}  <!-- << ADD THIS LINE TO FIX STATIC ERRORS -->
+
+{% block content %}
+<div class="cart-container">
+    <h2>Your Cart</h2>
+
+    {% if items %}
+        {% for item in items %}
+            <div class="cart-card">
+                <h3>{{ item.product.name }}</h3>
+                <p>Quantity: {{ item.quantity }}</p>
+                <p>Price: R {{ item.product.price }}</p>
+                <p><strong>Total: R {{ item.total_price }}</strong></p>
+            </div>
+        {% endfor %}
+
+        <h2 class="cart-total">Total Amount: R {{ total }}</h2>
+        <a href="{% url 'checkout' %}">
+            <button class="btn-checkout">Proceed to Checkout</button>
+        </a>
+    {% else %}
+        <div class="cart-card">
+            <p>Your cart is empty.</p>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Inline styling for colors -->
+<style>
+.cart-container {
+    background-color: #1a1a1a; /* dark background like home page */
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 700px;
+    margin: 30px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.cart-card {
+    background-color: #222; /* slightly lighter than container */
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.cart-card h3 {
+    color: #ffd700; /* yellow accent for product name */
+}
+
+.cart-card p {
+    font-size: 16px;
+}
+
+.cart-total {
+    color: #00ffff; /* blue accent for total */
+    margin-top: 20px;
+}
+
+.btn-checkout {
+    background-color: #007bff; /* blue button */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.btn-checkout:hover {
+    background-color: #0056b3;
+}
+</style>
+{% endblock %}
+
+

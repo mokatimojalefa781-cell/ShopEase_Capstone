@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ShopEase | Welcome</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #000000, #0a1a2f);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: #0f172a;
+            padding: 40px;
+            width: 420px;
+            border-radius: 16px;
+            box-shadow: 0 0 40px rgba(255, 204, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffcc00;
+            margin-bottom: 10px;
+        }
+
+        p {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #cbd5f5;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            margin-bottom: 18px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            background: #020617;
+            color: white;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #2563eb, #ffcc00);
+            color: black;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.6);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            color: #64748b;
+        }
+
+        .error {
+            background: #7f1d1d;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Welcome to ShopEase</h1>
+    <p>Login or create an account to continue</p>
+
+    <!-- LOGIN FORM -->
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+
+        {% if login_form.non_field_errors %}
+            <div class="error">
+                {{ login_form.non_field_errors|striptags }}
+            </div>
+        {% endif %}
+
+        <label>Username</label>
+        {{ login_form.username }}
+
+        <label>Password</label>
+        {{ login_form.password }}
+
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="divider">OR REGISTER</div>
+
+    <!-- REGISTER FORM -->
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+
+        {{ register_form.username }}
+        {{ register_form.password1 }}
+        {{ register_form.password2 }}
+
+        <button type="submit">Create Account</button>
+    </form>
+</div>
+
+</body>
+</html>

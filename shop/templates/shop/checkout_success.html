@@ -1,0 +1,9 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<div class="checkout-container">
+    <h1>Order Confirmed!</h1>
+    <p>Thank you for shopping! Your total was ${{ total }}.</p>
+    <a href="{% url 'products' %}" class="btn-confirm">Continue Shopping</a>
+</div>
+{% endblock %}

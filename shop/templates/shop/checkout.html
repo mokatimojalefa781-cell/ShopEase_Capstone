@@ -1,0 +1,63 @@
+{% extends 'shop/base.html' %}
+{% load static %}  <!-- << ADD THIS LINE -->
+
+{% block content %}
+<div class="checkout-container">
+    <h1>Checkout</h1>
+
+    {% if items %}
+        <ul class="checkout-items">
+        {% for item in items %}
+            <li>{{ item.quantity }} x {{ item.product.name }} - ${{ item.total_price }}</li>
+        {% endfor %}
+        </ul>
+        <p class="checkout-total"><strong>Total: ${{ total }}</strong></p>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn-confirm">Confirm Order</button>
+        </form>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+</div>
+
+<!-- Optional inline style for colors if not in CSS -->
+<style>
+.checkout-container {
+    background-color: #1a1a1a; /* dark background like your home page */
+    color: #fff; /* white text */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 30px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.checkout-items li {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.checkout-total {
+    font-size: 20px;
+    color: #ffd700; /* yellow accent */
+}
+
+.btn-confirm {
+    background-color: #007bff; /* blue button */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.btn-confirm:hover {
+    background-color: #0056b3;
+}
+</style>
+{% endblock %}
+
